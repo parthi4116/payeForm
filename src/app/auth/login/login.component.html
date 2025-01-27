@@ -1,0 +1,57 @@
+<div class="d-flex justify-content-center h-100 flex-column p-5">
+  <div class="card shadow ">
+    <div class="card-header border-bottom-0 bg-white">
+      <div class="text-center cus-primary fw-bolder fs-5">GpPG Payment Gateway</div>
+    </div>
+
+    <div class="card-body">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+        <!-- Username -->
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user"></i></span>
+          <input type="text" class="form-control" formControlName="username" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+
+        <!-- Display Username Errors -->
+        <ng-container *ngTemplateOutlet="formError; context: { control: loginForm.controls['username'], message: 'Username is required', validation: 'required' }"></ng-container>
+        <ng-container *ngTemplateOutlet="formError; context: { control: loginForm.controls['username'], message: 'Username must be at least 3 characters long', validation: 'minlength' }"></ng-container>
+
+        <!-- Password -->
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-lock"></i></span>
+          <input type="password" #x formControlName="password" class="form-control" placeholder="UserPassword" aria-label="Password" aria-describedby="basic-addon1">
+          <span class="eye-icon" (click)="x.type = x.type === 'password' ? 'text' : 'password'">
+            <i class="fa-solid" [ngClass]="x.type === 'password' ? 'fa-eye' : 'fa-eye-slash'"></i>
+          </span>
+        </div>
+
+        <!-- Display Password Errors -->
+        <ng-container *ngTemplateOutlet="formError; context: { control: loginForm.controls['password'], message: 'Password is required', validation: 'required' }"></ng-container>
+        <ng-container *ngTemplateOutlet="formError; context: { control: loginForm.controls['password'], message: 'Password must be at least 6 characters long', validation: 'minlength' }"></ng-container>
+
+        <!-- Login Button -->
+        <button class="btn btn-light rounded-pill w-100 text-center" type="submit"
+        (keydown.enter)="onSubmit()"[disabled]="loginForm.invalid">
+          <span><i class="fa-solid fa-right-to-bracket me-2"></i></span>
+          <span class="cus-primary fs-6">Login</span>
+        </button>
+
+        <div class="text-center mt-2">
+          <a href="/forgot-password">Forgot Password</a>
+        </div>
+      </form>
+    </div>
+
+
+  </div>
+</div>
+
+<!-- ng-template for error handling -->
+<ng-template #formError let-control="control" let-message="message" let-validation="validation">
+  <ng-container *ngIf="submitted && control.hasError(validation) && (control.dirty || control.touched)">
+    <div class="fv-plugins-message-container">
+      <div class="fv-help-block text-danger">{{ message }}</div>
+    </div>
+  </ng-container>
+</ng-template>

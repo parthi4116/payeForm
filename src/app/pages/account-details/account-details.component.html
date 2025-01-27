@@ -1,0 +1,260 @@
+<div>
+  <form [formGroup]="payerForm" (ngSubmit)="onSubmit()">
+    <div class="d-flex justify-content-between align-items-center p-3">
+      <div class="cus-primary fs-6 fw-bold">Tips Fund Transfer</div>
+      <div>
+        <button class="btn btn-primary " type="submit">
+          <span><i class="fa-solid fa-arrow-up-right-from-square  me-2"></i></span>
+          Submit</button>
+        <button class="btn btn-light shadow ms-3" type="button" (click)="resetForm()">
+          <span><i class="fa-solid fa-circle-xmark me-2"></i></span>
+          <span class="cus-primary ">Refresh</span></button>
+      </div>
+    </div>
+
+
+    <!-- Payee Details  -->
+    <div class="card">
+      <div class="card-header bg-light">
+        <div class="header-with-line">
+          <div class="header-line text-end">
+            <span class="fw-bold bg-white p-1">Payee Details</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-3 py-2">
+            <div>Bank / Account Number</div>
+            <div class="bg-gray p-1 ps-2"> {{accNumber }}</div>
+          </div>
+
+          <div class="col-md-3 py-2">
+            <div>FSP Id</div>
+            <div class="bg-gray p-1 ps-2"> {{ payerDetail?.fspId }}</div>
+          </div>
+
+          <div class="col-md-3 py-2">
+            <div>Full Name</div>
+            <div class="bg-gray p-1 ps-2"> {{ payerDetail?.fullName | titlecase}}</div>
+          </div>
+
+          <div class="col-md-3 py-2">
+            <div>Account Category</div>
+            <div class="bg-gray p-1 ps-2"> {{payerDetail?.accountCategory|uppercase }}</div>
+          </div>
+
+          <div class="col-md-3 py-2">
+            <div> Account Type</div>
+            <div class="bg-gray p-1 ps-2"> {{payerDetail?.accountType|uppercase }}</div>
+          </div>
+
+          <div class="col-md-3 py-2">
+            <div>NIN</div>
+            <div class="bg-gray p-1 ps-2"> {{payerDetail?.identityValue }}</div>
+          </div>
+
+          <div class="col-md-3 py-2">
+            <div>Request Id</div>
+            <div class="bg-gray p-1 ps-2"> {{payerDetail?.requestId }}</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Payer Details  -->
+    <div class="card">
+      <div class="card-header bg-light">
+        <div class="header-with-line">
+          <div class="header-line text-end w-110px">
+            <span class="fw-bold bg-white p-1">payer Details</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+
+          <div class="col-md-3 py-2">
+            <div> Account Number <span class="text-danger"> *</span></div>
+            <mat-form-field appearance="fill" class="">
+              <input matInput type="text" required formControlName="accountNumber">
+            </mat-form-field>
+            <ng-container *ngTemplateOutlet="formError;
+             context: { control: payerForm.controls['accountNumber'],
+             validation: 'required', message: 'account Number is required.' }"></ng-container>
+          </div>
+
+          <div class="col-md-3 py-2">
+            <div> Account Branch <span class="text-danger"> *</span></div>
+            <mat-form-field appearance="fill">
+              <mat-select formControlName="accountBranch">
+
+                <mat-option value="chennai">Chennai</mat-option>
+                <mat-option value="bangalore">Bangalore</mat-option>
+                <mat-option value="coimbatore">Coimbatore</mat-option>
+              </mat-select>
+              <i class="fa-solid fa-xmark cus-close text-cursor"  *ngIf="payerForm.controls['accountBranch']?.value!=''" (click)="removeSelcetedData('accountBranch')"></i>
+            </mat-form-field>
+            <ng-container *ngTemplateOutlet="formError;
+             context: { control: payerForm.controls['accountBranch'],
+             validation: 'required', message: 'account Branch is required.' }"></ng-container>
+
+          </div>
+
+          <div class="col-md-3 py-2">
+            <div> Account Name <span class="text-danger"> *</span></div>
+            <mat-form-field appearance="fill" class="">
+              <input matInput type="text" formControlName="accountName">
+            </mat-form-field>
+            <ng-container *ngTemplateOutlet="formError;
+             context: { control: payerForm.controls['accountName'],
+             validation: 'required', message: 'account Name is required.' }"></ng-container>
+          </div>
+
+          <div class="col-md-3 py-2">
+            <div> FSP Id <span class="text-danger"> *</span></div>
+            <mat-form-field appearance="fill" class="">
+              <input matInput type="text" formControlName="fspId">
+            </mat-form-field>
+            <ng-container *ngTemplateOutlet="formError;
+             context: { control: payerForm.controls['fspId'],
+             validation: 'required', message: 'FSP Id is required.' }"></ng-container>
+          </div>
+
+          <div class="col-md-3 py-2">
+            <div> Account Category <span class="text-danger"> *</span></div>
+            <mat-form-field appearance="fill">
+
+              <mat-select formControlName="accountCategory">
+                <mat-option value="person">Person</mat-option>
+                <mat-option value="joined">Joined</mat-option>
+              </mat-select>
+              <i class="fa-solid fa-xmark cus-close text-cursor" *ngIf="payerForm.controls['accountCategory']?.value!=''" (click)="removeSelcetedData('accountCategory')"></i>
+            </mat-form-field>
+            <ng-container *ngTemplateOutlet="formError;
+             context: { control: payerForm.controls['accountCategory'],
+             validation: 'required', message: 'account Category is required.' }"></ng-container>
+
+          </div>
+
+          <div class="col-md-3 py-2">
+            <div> Account Type <span class="text-danger"> *</span></div>
+            <mat-form-field appearance="fill">
+              <mat-select formControlName="accountType">
+                <mat-option value="card">Card</mat-option>
+                <mat-option value="cardless">card-Less</mat-option>
+                <mat-option value="bank">Bank</mat-option>
+              </mat-select>
+              <i class="fa-solid fa-xmark cus-close text-cursor" *ngIf="payerForm.controls['accountType']?.value!=''" (click)="removeSelcetedData('accountType')"></i>
+            </mat-form-field>
+            <ng-container *ngTemplateOutlet="formError;
+             context: { control: payerForm.controls['accountType'],
+             validation: 'required', message: 'account Type is required.' }"></ng-container>
+
+          </div>
+
+          <div class="col-md-3 py-2">
+            <div> Description <span class="text-danger"> *</span></div>
+            <mat-form-field appearance="fill" class="">
+              <input matInput type="text" formControlName="accountDescription">
+            </mat-form-field>
+            <ng-container *ngTemplateOutlet="formError;
+             context: { control: payerForm.controls['accountDescription'],
+             validation: 'required', message: 'Description is required.' }"></ng-container>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Amount  -->
+    <div class="card">
+      <div class="card-header bg-light">
+        <div class="header-with-line">
+          <div class="header-line text-end w-73px">
+            <span class="fw-bold bg-white p-1">Amount</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-3 py-2">
+            <div> Amount <span class="text-danger"> *</span></div>
+            <mat-form-field appearance="fill" class="">
+              <input matInput type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" formControlName="accountAmount">
+            </mat-form-field>
+            <ng-container *ngTemplateOutlet="formError;
+             context: { control: payerForm.controls['accountAmount'],
+             validation: 'required', message: 'Amount is required.' }"></ng-container>
+          </div>
+
+          <div class="col-md-3 py-2">
+            <div> Currency <span class="text-danger"> *</span></div>
+            <mat-form-field appearance="fill">
+              <mat-select formControlName="accountCurrency">
+                <mat-option value="inr">INR</mat-option>
+                <mat-option value="usd">USD</mat-option>
+                <mat-option value="eur">EUR</mat-option>
+              </mat-select>
+              <i class="fa-solid fa-xmark cus-close text-cursor" *ngIf="payerForm.controls['accountCurrency']?.value!=''" (click)="removeSelcetedData('accountCurrency')"></i>
+            </mat-form-field>
+            <ng-container *ngTemplateOutlet="formError;
+             context: { control: payerForm.controls['accountCurrency'],
+             validation: 'required', message: 'Currency is required.' }"></ng-container>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- End User Fee -->
+    <div class="card">
+      <div class="card-header bg-light">
+        <div class="header-with-line">
+          <div class="header-line text-end w-108px">
+            <span class="fw-bold bg-white p-1">End User Fee</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-3 py-2">
+            <div> Amount <span class="text-danger"> *</span></div>
+            <mat-form-field appearance="fill" class="">
+              <input matInput type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" formControlName="endUserAmount">
+            </mat-form-field>
+            <ng-container *ngTemplateOutlet="formError;
+             context: { control: payerForm.controls['endUserAmount'],
+             validation: 'required', message: 'Amount is required.' }"></ng-container>
+          </div>
+
+          <div class="col-md-3 py-2">
+            <div> Currency <span class="text-danger"> *</span></div>
+            <mat-form-field appearance="fill">
+              <mat-select formControlName="endUserCurrency">
+                <mat-option value="inr">INR</mat-option>
+                <mat-option value="usd">USD</mat-option>
+                <mat-option value="eur">EUR</mat-option>
+              </mat-select>
+              <i class="fa-solid fa-xmark cus-close text-cursor" *ngIf="payerForm.controls['endUserCurrency']?.value!=''" (click)="removeSelcetedData('endUserCurrency')"></i>
+            </mat-form-field>
+            <ng-container *ngTemplateOutlet="formError;
+             context: { control: payerForm.controls['endUserCurrency'],
+             validation: 'required', message: 'Currency is required.' }"></ng-container>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<ng-template #formError let-control="control" let-message="message" let-validation="validation">
+  <ng-container *ngIf="submitted && control.hasError(validation) && (control.dirty || control.touched)">
+    <div class="fv-plugins-message-container">
+      <div class="fv-help-block text-danger">{{ message }}</div>
+    </div>
+  </ng-container>
+</ng-template>

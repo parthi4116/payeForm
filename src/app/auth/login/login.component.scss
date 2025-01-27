@@ -1,0 +1,31 @@
+$primary-color: #173c78;
+
+.card-body.input-group {
+    input {
+        border-top-right-radius: 12px;
+        border-bottom-right-radius: 12px;
+    }
+
+    span {
+        border-top-left-radius: 12px;
+        border-bottom-left-radius: 12px;
+    }
+
+    i {
+        color: $primary-color;
+    }
+}
+
+.card {
+    border-radius: 30px;
+    overflow: hidden;
+}
+.btn-light{
+    border:1px solid #ced4da
+}
+.eye-icon{
+    position: absolute;
+    z-index: 99;
+    top: 6px;
+    right: 5px;
+}

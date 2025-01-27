@@ -1,0 +1,18 @@
+{
+    "status": 1,
+    "message": "Operation Success",
+    "data": {
+      "requestId": "WTIPSFT0000000795",
+      "payerRef": "qi2brttlmpb8",
+      "identifierType": "BANK",
+      "identifier": "01258796325",
+      "fspId": "004",
+      "fullName": "Mahija Joseph",
+      "accountCategory": "PERSON",
+      "accountType": "BANK",
+      "identityType": "NIN",
+      "identityValue": "19501007111010001027",
+      "lookUpId": null
+    }
+  }
+  

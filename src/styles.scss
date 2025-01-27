@@ -1,0 +1,47 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+@import 'ngx-toastr/toastr';
+
+
+html,
+body {
+   height: 100%;
+   width: 100%;
+}
+
+$primary-color: #173c78;
+
+.bg-blue {
+   background-color: #003152;
+}
+
+.bg-sky {
+   height: 100%;
+   background-color: #d6ebff;
+}
+
+.cus-primary {
+   color: $primary-color;
+}
+
+.bg-gray {
+   background-color: #dfe1e6;
+}
+
+.font-12 {
+   font-size: 12px !important;
+}
+
+.radius-20 {
+   border-radius: 20px;
+}
+
+.text-cursor {
+   cursor: pointer;
+}
+
+.mdc-text-field--filled,.mdc-text-field--focused{
+   background-color: white !important;
+}
+
+
