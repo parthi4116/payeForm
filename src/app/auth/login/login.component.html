@@ -21,7 +21,7 @@
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-lock"></i></span>
           <input type="password" #x formControlName="password" class="form-control" placeholder="UserPassword" aria-label="Password" aria-describedby="basic-addon1">
-          <span class="eye-icon" (click)="x.type = x.type === 'password' ? 'text' : 'password'">
+          <span class="eye-icon text-cursor" (click)="x.type = x.type === 'password' ? 'text' : 'password'">
             <i class="fa-solid" [ngClass]="x.type === 'password' ? 'fa-eye' : 'fa-eye-slash'"></i>
           </span>
         </div>
